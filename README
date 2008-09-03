@@ -1,0 +1,28 @@
+ncurses module for Qore
+version 0.1 by David Nichols
+
+Requires qore 0.7.0 and ncurses or SYSV curses headers and libraries to build.
+
+Documentation TBD
+
+this module is currently experimental: provides the "Panel" and "Window" classes along with many functions and constants - see test/ncurses.q and examples/hanio.q and examples/worms.q for more information. 
+
+test script: test/ncurses.q
+example scripts: examples/
+
+BUILD AND INSTALL
+-----------------
+
+configure
+make
+sudo make install
+
+The configure script will find out where your qore module directory is found and set this for the install directory.
+
+BUILD FROM SVN
+--------------
+
+reconf.sh
+configure
+make
+sudo make install
