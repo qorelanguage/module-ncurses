@@ -10,7 +10,7 @@ ncurses_la_LDFLAGS = -module -avoid-version ${NCURSES_LIBS}
 
 INCLUDES = -I$(top_srcdir)/include
 
-AM_CPPFLAGS= ${NCURSES_CPPFLAGS}
+AM_CPPFLAGS= ${NCURSES_CPPFLAGS} $(QORE_CPPFLAGS)
 
 if COND_PROFILE
 AM_CXXFLAGS=-g -pg
