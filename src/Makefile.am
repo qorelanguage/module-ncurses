@@ -13,10 +13,10 @@ INCLUDES = -I$(top_srcdir)/include
 AM_CPPFLAGS= ${NCURSES_CPPFLAGS}
 
 if COND_PROFILE
-AM_CXXFLAGS += -g -pg
+AM_CXXFLAGS=-g -pg
 else
 if COND_DEBUG
-AM_CXXFLAGS += -g
+AM_CXXFLAGS=-g
 endif
 endif
 

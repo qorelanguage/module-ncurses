@@ -1,7 +1,7 @@
 # Process this file with autoconf to produce a configure script.
 
 # AC_PREREQ(2.59)
-AC_INIT([qore-ncurses-module], [0.0.1],
+AC_INIT([qore-ncurses-module], [0.1],
         [David Nichols <nicholsman@gmail.com>],
         [qore-ncurses-module])
 AM_INIT_AUTOMAKE
