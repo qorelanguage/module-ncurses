@@ -5,7 +5,10 @@ Requires qore 0.7.0 and ncurses or SYSV curses headers and libraries to build.
 
 Documentation TBD
 
-this module is currently experimental: provides the "Panel" and "Window" classes along with many functions and constants - see test/ncurses.q and examples/hanio.q and examples/worms.q for more information. 
+This module provides the "Panel" and "Window" classes along with many functions and constants - see test/ncurses.q and examples/hanio.q and examples/worms.q for more information. 
+
+note that this module is still experimental due to the fact that I'm not sure if it's possible to safely enable threading without putting a big lock around every curses call.  Basically threading and curses do not mix.
+if your ncurses is in a non-standard location, set the NCURSES_DIR environment variable before running configure.  Also can be built with Solaris curses.
 
 test script: test/ncurses.q
 example scripts: examples/
