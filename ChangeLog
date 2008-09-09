@@ -1,0 +1,31 @@
+2008-09-09 07:01  david_nichols
+
+	* Makefile.am, docs, docs/ncurses-module-doc.html,
+	  qore-ncurses-module.spec: added module documentation
+
+2008-09-03 12:41  david_nichols
+
+	* src/Makefile.am: build fixes
+
+2008-09-03 12:11  david_nichols
+
+	* COPYING: updated license for modules to LGPL (*not* GPL)
+
+2008-09-03 12:07  david_nichols
+
+	* README: udpated READMEs
+
+2008-09-03 09:23  david_nichols
+
+	* Makefile.am, configure.ac, src/Makefile.am: build fixes
+
+2008-09-03 09:19  david_nichols
+
+	* ., AUTHORS, COPYING, ChangeLog, Makefile.am, NEWS, README,
+	  configure.ac, examples, examples/hanoi.q, examples/worm.q,
+	  ltmain.sh, m4, m4/acx_pthread.m4, qore-ncurses-module.spec,
+	  reconf.sh, src, src/Makefile.am, src/QC_Panel.cc, src/QC_Panel.h,
+	  src/QC_Window.cc, src/QC_Window.h, src/ncurses-module.h,
+	  src/ncurses.cc, src/single-compilation-unit.cc, test,
+	  test/ncurses.q: initial import as independent project
+
