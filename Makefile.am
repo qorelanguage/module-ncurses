@@ -10,6 +10,7 @@ EXTRA_DIST = COPYING ChangeLog AUTHORS README \
 	test/ncurses.q \
 	examples/hanoi.q \
 	examples/worm.q \
+	docs/ncurses-module-doc.html \
 	qore-ncurses-module.spec
 
 libtool: $(LIBTOOL_DEPS)

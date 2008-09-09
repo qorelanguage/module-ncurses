@@ -95,7 +95,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %{module_dir}/ncurses.qmod
-%doc COPYING README ChangeLog AUTHORS test/ncurses.q examples/
+%doc COPYING README ChangeLog AUTHORS test/ncurses.q examples/ docs/ncurses-module-doc.html
 
 %changelog
 * Tue Sep 2 2008 David Nichols <david_nichols@users.sourceforge.net>
