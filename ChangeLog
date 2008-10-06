@@ -1,3 +1,12 @@
+2008-09-09 09:11  david_nichols
+
+	* docs/ncurses-module-doc.html: updated docs
+
+2008-09-09 07:04  david_nichols
+
+	* ChangeLog, qore-ncurses-module.spec: updated ChangeLog, fixed
+	  license tag in spec file
+
 2008-09-09 07:01  david_nichols
 
 	* Makefile.am, docs, docs/ncurses-module-doc.html,
