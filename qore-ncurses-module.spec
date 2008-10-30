@@ -52,7 +52,7 @@ Source: http://prdownloads.sourceforge.net/qore/%{name}-%{version}.tar.gz
 Source0: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires: /usr/bin/env
-Requires: qore-module-api-%{module-version}
+Requires: qore-module-api-%{module_api}
 %if 0%{?suse_version}
 Requires: libncurses5
 %else
