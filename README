@@ -1,7 +1,7 @@
 ncurses module for Qore
-version 0.1 by David Nichols
+version 0.2 by David Nichols
 
-Requires qore 0.7.0 and ncurses or SYSV curses headers and libraries to build.
+Requires qore 0.7.1 and ncurses or SYSV curses headers and libraries to build.
 
 Documentation TBD
 

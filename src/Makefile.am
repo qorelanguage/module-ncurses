@@ -21,5 +21,5 @@ endif
 endif
 
 install-exec-hook:
-	mv $(DESTDIR)$(libdir)/ncurses.$(MODULE_SUFFIX) $(DESTDIR)$(libdir)/ncurses.qmod
+	mv $(DESTDIR)$(libdir)/ncurses.$(MODULE_SUFFIX) $(DESTDIR)$(libdir)/ncurses-api-$(MODULE_API).qmod
 	rm -f $(DESTDIR)$(libdir)/ncurses.la

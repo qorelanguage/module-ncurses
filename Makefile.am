@@ -7,6 +7,7 @@ noinst_HEADERS = src/ncurses-module.h \
 	src/QC_Window.h
 
 EXTRA_DIST = COPYING ChangeLog AUTHORS README \
+	RELEASE-NOTES \
 	test/ncurses.q \
 	examples/hanoi.q \
 	examples/worm.q \
