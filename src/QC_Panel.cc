@@ -21,17 +21,15 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include <qore/Qore.h>
-
 #include "ncurses-module.h"
+
 #include "QC_Panel.h"
 
 qore_classid_t CID_PANEL;
 
 //class QoreThreadLock nc_panel_update_lock;
 
-void PC_constructor(class QoreObject *self, const QoreListNode *params, ExceptionSink *xsink)
-{
+void PC_constructor(class QoreObject *self, const QoreListNode *params, ExceptionSink *xsink) {
    const AbstractQoreNode *p0, *p1, *p2, *p3;
    p0 = get_param(params, 0);
    p1 = get_param(params, 1);

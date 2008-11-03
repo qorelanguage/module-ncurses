@@ -20,9 +20,8 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include <qore/Qore.h>
-
 #include "ncurses-module.h"
+
 #include "QC_Window.h"
 
 qore_classid_t CID_WINDOW;

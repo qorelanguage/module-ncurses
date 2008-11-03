@@ -24,7 +24,11 @@
 
 #define _QORE_NCURSES_MODULE_H
 
-class QoreStringNode *ncurses_module_init();
+#include "../config.h"
+
+#include <qore/Qore.h>
+
+QoreStringNode *ncurses_module_init();
 void ncurses_module_ns_init(class QoreNamespace *rns, class QoreNamespace *qns);
 void ncurses_module_delete();
 

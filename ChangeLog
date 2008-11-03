@@ -1,3 +1,28 @@
+2008-10-30 17:20  david_nichols
+
+	* qore-ncurses-module.spec: various fixes
+
+2008-10-30 10:42  david_nichols
+
+	* Makefile.am, README, RELEASE-NOTES, configure.ac,
+	  qore-ncurses-module.spec, src/Makefile.am: udpated to qoer 0.7.1
+	  module handling
+
+2008-10-23 06:30  david_nichols
+
+	* configure.ac: updated to set 64-bit compile mode by default on
+	  itanium with g++ and aCC
+
+2008-10-08 20:16  david_nichols
+
+	* qore-ncurses-module.spec, src/Makefile.am: spec file and module
+	  build fixes using prefix=/usr and make install
+	  DESTDIR=$RPM_BUILD_ROOT
+
+2008-10-06 20:27  david_nichols
+
+	* ChangeLog: updated changelog
+
 2008-09-09 09:11  david_nichols
 
 	* docs/ncurses-module-doc.html: updated docs

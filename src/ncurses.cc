@@ -22,17 +22,16 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include <qore/Qore.h>
-
 #include "ncurses-module.h"
+
 #include "QC_Window.h"
 #include "QC_Panel.h"
 
 #include <curses.h>
 
-#ifndef QORE_MONOLITHIC
+// qore module symbols
 DLLEXPORT char qore_module_name[] = "ncurses";
-DLLEXPORT char qore_module_version[] = "0.1";
+DLLEXPORT char qore_module_version[] = PACKAGE_VERSION;
 DLLEXPORT char qore_module_description[] = "ncurses class module";
 DLLEXPORT char qore_module_author[] = "David Nichols";
 DLLEXPORT char qore_module_url[] = "http://qore.sourceforge.net";
@@ -42,19 +41,16 @@ DLLEXPORT qore_module_init_t qore_module_init = ncurses_module_init;
 DLLEXPORT qore_module_ns_init_t qore_module_ns_init = ncurses_module_ns_init;
 DLLEXPORT qore_module_delete_t qore_module_delete = ncurses_module_delete;
 DLLEXPORT qore_license_t qore_module_license = QL_LGPL;
-#endif
 
-class QoreThreadLock lUpdate, lGetch;
+QoreThreadLock lUpdate, lGetch;
 
-static inline void init_colors()
-{
+static inline void init_colors() {
    for (int i = 0; i < COLORS; i++)
       for (int j = 0; j < COLORS; j++)
 	 init_pair(i * COLORS + j, i, j);
 }
 
-static inline void init_constants(class QoreNamespace *ns)
-{
+static inline void init_constants(class QoreNamespace *ns) {
    // colors
    ns->addConstant("COLOR_BLACK", new QoreBigIntNode(COLOR_BLACK));
    ns->addConstant("COLOR_RED", new QoreBigIntNode(COLOR_RED));
@@ -215,10 +211,9 @@ static inline void init_constants(class QoreNamespace *ns)
 #endif // NCURSES_MOUSE_VERSION
 }
 
-class q_nc_init_class q_nc_init;
+q_nc_init_class q_nc_init;
 
-void q_nc_init_class::init_intern()
-{
+void q_nc_init_class::init_intern() {
    l.lock();
    if (!initialized)
    {
@@ -233,25 +228,21 @@ void q_nc_init_class::init_intern()
    l.unlock();
 }
 
-void q_nc_init_class::close()
-{
+void q_nc_init_class::close() {
    l.lock();
-   if (initialized)
-   {
+   if (initialized) {
       endwin();
       initialized = false;
    }
    l.unlock();
 }
 
-static class AbstractQoreNode *f_initscr(const QoreListNode *params, class ExceptionSink *xsink)
-{
+static class AbstractQoreNode *f_initscr(const QoreListNode *params, class ExceptionSink *xsink) {
    q_nc_init.init();
    return NULL;
 }
 
-static class AbstractQoreNode *f_printw(const QoreListNode *params, class ExceptionSink *xsink)
-{
+static class AbstractQoreNode *f_printw(const QoreListNode *params, class ExceptionSink *xsink) {
    q_nc_init.init();
    QoreStringNodeHolder str(q_sprintf(params, 0, 0, xsink)); 
    // note: need cast for solaris curses
@@ -259,8 +250,7 @@ static class AbstractQoreNode *f_printw(const QoreListNode *params, class Except
    return new QoreBigIntNode(rc);
 }
 
-static class AbstractQoreNode *f_refresh(const QoreListNode *params, class ExceptionSink *xsink)
-{
+static class AbstractQoreNode *f_refresh(const QoreListNode *params, class ExceptionSink *xsink) {
    q_nc_init.init();
    lUpdate.lock();
    int rc = refresh();
@@ -269,8 +259,7 @@ static class AbstractQoreNode *f_refresh(const QoreListNode *params, class Excep
    return new QoreBigIntNode(rc);
 }
 
-static class AbstractQoreNode *f_doupdate(const QoreListNode *params, class ExceptionSink *xsink)
-{
+static class AbstractQoreNode *f_doupdate(const QoreListNode *params, class ExceptionSink *xsink) {
    q_nc_init.init();
    lUpdate.lock();
    int rc = doupdate();
@@ -279,8 +268,7 @@ static class AbstractQoreNode *f_doupdate(const QoreListNode *params, class Exce
    return new QoreBigIntNode(rc);
 }
 
-static class AbstractQoreNode *f_getch(const QoreListNode *params, class ExceptionSink *xsink)
-{
+static class AbstractQoreNode *f_getch(const QoreListNode *params, class ExceptionSink *xsink) {
    q_nc_init.init();
 
    lGetch.lock();
@@ -289,8 +277,7 @@ static class AbstractQoreNode *f_getch(const QoreListNode *params, class Excepti
    return new QoreBigIntNode(rc);
 }
 
-static class AbstractQoreNode *f_endwin(const QoreListNode *params, class ExceptionSink *xsink)
-{
+static class AbstractQoreNode *f_endwin(const QoreListNode *params, class ExceptionSink *xsink) {
    q_nc_init.init();
 
    q_nc_init.close();
