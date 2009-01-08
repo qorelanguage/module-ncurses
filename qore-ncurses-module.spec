@@ -92,7 +92,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%{module_dir}/ncurses-api-%{module_api}.qmod
+%{module_dir}
 %doc COPYING README RELEASE-NOTES ChangeLog AUTHORS test/ncurses.q examples/ docs/ncurses-module-doc.html
 
 %changelog
