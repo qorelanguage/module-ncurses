@@ -320,7 +320,7 @@ sub doSomething2($w, $ref, $n)
 
 sub main()
 {
-    my ($ref, $x, $y, $n, $w, $h, $worm);
+    my ($ref, $x, $y, $n, $w, $worm);
 
     my $g = new GetOpt(worm_opts);
     my $o = $g.parse(\$ARGV);
