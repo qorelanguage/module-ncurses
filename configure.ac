@@ -254,8 +254,7 @@ if test "$enable_static_ncurses" = "yes"; then
 fi
 
 # don't add system directories to library path
-set_ncurses_lib()
-{
+set_ncurses_lib() {
    if test "$1" = "/usr" -a "$1" = "/"; then
       NCURSES_LIBS="-l$2 -lpanel"
    else
@@ -265,65 +264,69 @@ set_ncurses_lib()
 }
 
 # checks for ncurses (or curses) and panel libraries and include files and sets NCURSES_LIBS and NCURSES_CPPFLAGS appropriately
-check_ncurses()
-{
-    lib=$1/lib${LIBSUFFIX}
+check_ncurses() {
+    a="$1"
+    if test \( "$a" = "/" -o -z "$a" \) -a -h "$a/lib${LIBSUFFIX}"; then
+        a=/usr
+    fi
+
+    lib=$a/lib${LIBSUFFIX}
 
     if test -n "$ncurses_static"; then
     	if test -f "$lib/libncurses.a" -a -f "$lib/libpanel.a"; then
-	    ncurses_dir=$1
+	    ncurses_dir=$a
        	    AC_MSG_RESULT([$lib (ncurses forced static)])
 	    NCURSES_LIBS="$lib/libncurses.a $lib/libpanel.a"
 	elif test -f "$lib/libcurses.a" -a -f "$lib/libpanel.a"; then
-	    ncurses_dir=$1
+	    ncurses_dir=$a
        	    AC_MSG_RESULT([$lib (curses forced static)])
 	    NCURSES_LIBS="$lib/libcurses.a $lib/libpanel.a"
     	fi
     elif test -f "$lib/libncurses.${SHLIB_SUFFIX}" -a -f "$lib/libpanel.${SHLIB_SUFFIX}"; then
-       ncurses_dir=$1
+       ncurses_dir=$a
        AC_MSG_RESULT([$lib (ncurses shared)])
-       set_ncurses_lib "$1" ncurses
+       set_ncurses_lib "$a" ncurses
     elif test -f "$lib/libncurses.a" -a -f "$lib/libpanel.a"; then
-       ncurses_dir=$1
+       ncurses_dir=$a
        AC_MSG_RESULT([$lib (ncurses static)])
-       set_ncurses_lib "$1" ncurses
+       set_ncurses_lib "$a" ncurses
     elif test -f "$lib/libcurses.${SHLIB_SUFFIX}" -a -f "$lib/libpanel.${SHLIB_SUFFIX}"; then
-       ncurses_dir=$1
+       ncurses_dir=$a
        AC_MSG_RESULT([$lib (curses shared)])
        NCURSES_CPPFLAGS="-DNOMACROS"
-       set_ncurses_lib "$1" curses
+       set_ncurses_lib "$a" curses
     elif test -f "$lib/libcurses.a" -a -f "$lib/libpanel.a"; then
-       ncurses_dir=$1
+       ncurses_dir=$a
        AC_MSG_RESULT([$lib (curses static)])
        NCURSES_CPPFLAGS="-DNOMACROS"
-       set_ncurses_lib "$1" curses
+       set_ncurses_lib "$a" curses
     fi
 
     # make sure include files are in the expected place as well
     if test -n "$ncurses_dir"; then
        AC_MSG_CHECKING([for ncurses and panel include files])
-       if test -f "$1/include/curses.h" -a -f "$1/include/panel.h"; then
+       if test -f "$a/include/curses.h" -a -f "$a/include/panel.h"; then
           AC_MSG_RESULT([found in $ncurses_dir])
-	  if test "$1" = "/usr"; then
+	  if test "$a" = "/usr"; then
 	     NCURSES_CPPFLAGS="$NCURSES_CPPFLAGS"
 	  else
-	     NCURSES_CPPFLAGS="$NCURSES_CPPFLAGS -I$1/include"
+	     NCURSES_CPPFLAGS="$NCURSES_CPPFLAGS -I$a/include"
 	  fi
 	  AC_SUBST(NCURSES_CPPFLAGS)
-       elif test -f "$1/include/curses.h" -a -f "$1/include/ncurses/panel.h"; then
-          AC_MSG_RESULT([found in $ncurses_dir and $1/include/ncurses/panel.h])
-	  if test "$1" = "/usr"; then
+       elif test -f "$a/include/curses.h" -a -f "$a/include/ncurses/panel.h"; then
+          AC_MSG_RESULT([found in $ncurses_dir and $a/include/ncurses/panel.h])
+	  if test "$a" = "/usr"; then
 	     NCURSES_CPPFLAGS="$NCURSES_CPPFLAGS -I/usr/include/ncurses"
 	  else
-	     NCURSES_CPPFLAGS="$NCURSES_CPPFLAGS -I$1/include -I$1/include/ncurses"
+	     NCURSES_CPPFLAGS="$NCURSES_CPPFLAGS -I$a/include -I$a/include/ncurses"
 	  fi
 	  AC_SUBST(NCURSES_CPPFLAGS)
-       elif test -f "$1/include/ncurses/curses.h" -a "$1/include/ncurses/panel.h"; then
-          AC_MSG_RESULT([found in $1/include/ncurses])
-	  if test "$1" = "/usr"; then
-	     NCURSES_CPPFLAGS="$NCURSES_CPPFLAGS -I$1/include/ncurses"
+       elif test -f "$a/include/ncurses/curses.h" -a "$a/include/ncurses/panel.h"; then
+          AC_MSG_RESULT([found in $a/include/ncurses])
+	  if test "$a" = "/usr"; then
+	     NCURSES_CPPFLAGS="$NCURSES_CPPFLAGS -I$a/include/ncurses"
 	  else
-	     NCURSES_CPPFLAGS="$NCURSES_CPPFLAGS -I$1/include -I$1/include/ncurses"
+	     NCURSES_CPPFLAGS="$NCURSES_CPPFLAGS -I$a/include -I$a/include/ncurses"
 	  fi
 	  AC_SUBST(NCURSES_CPPFLAGS)
        else
@@ -377,7 +380,11 @@ set_qore_cppflags() {
 }
 
 find_qore() {
-    lib=$1/lib${LIBSUFFIX}
+    a="$1"
+    if test \( "$a" = "/" -o -z "$a" \) -a -h "$a/lib${LIBSUFFIX}"; then
+        a=/usr
+    fi
+    lib=$a/lib${LIBSUFFIX}
 
     # if we only want the static qore libraries
     if test -n "$qore_static"; then
@@ -406,10 +413,10 @@ find_qore() {
 
     AC_MSG_CHECKING([for qore include files])
     # try to find include files
-    if test "$1" = "/"; then
+    if test "$a" = "/"; then
         inc=/usr/include
     else
-        inc=$1/include
+        inc=$a/include
     fi
     if test -f "$inc/qore/Qore.h"; then
         AC_MSG_RESULT([found: $inc])
@@ -628,8 +635,7 @@ else
    printf " (32-bit)\n"
 fi
 
-show_library_feature()
-{
+show_library_feature() {
    printf "%-24s: " "$1"
    if test "$2" = "yes"; then
       printf "%-8s" yes
