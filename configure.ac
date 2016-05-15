@@ -60,9 +60,7 @@ case "${host_os}" in
 		SHLIB_SUFFIX=so
 		AC_DEFINE(LINUX, 1, if compiling on Linux)
 		;;
-     *solaris*) # set compile flags for Solaris
-		CPPFLAGS="${CPPFLAGS} -D_POSIX_C_SOURCE=199506L -D_XPG4_2 -D_XPG5 -D__EXTENSIONS__"
-		# for checking for some network functions on Solaris
+     *solaris*) # for checking for some network functions on Solaris
 		LDFLAGS="$LDFLAGS -lnsl"
 		# assume we are using CC if not using g++, add -norunpath to link flags in this case
 		if test "$GXX" != "yes"; then
@@ -116,10 +114,10 @@ if test "$enable_64bit" = "auto"; then
    # turn on 64-bit by default if compiling on a 64-bit platform
    case "${host_cpu}" in
        *64*)
-                 enable_64bit=yes 
+                 enable_64bit=yes
                  ;;
        s390x)
-                 enable_64bit=yes 
+                 enable_64bit=yes
                  ;;
        *)        case "${host_os}" in
                      darwin*)   mv=`uname -r|cut -f1 -d.`
@@ -236,11 +234,7 @@ else
 		fi
 		;;
      *solaris*) if test "$GXX" = "yes"; then
-		    if test "$host_cpu" = "sparc"; then
-		        CXXFLAGS="$CXXFLAGS -mcpu=v8 -m32"
-		    else
-		        CXXFLAGS="$CXXFLAGS -m32"
-		    fi
+		    CXXFLAGS="$CXXFLAGS -m32"
 		else
 		    CXXFLAGS="$CXXFLAGS -xarch=generic"
 		fi
@@ -606,7 +600,7 @@ if test "$enable_optimization" = "yes"; then
     elif test "$CXX" = "CC" -a "`echo $host_os|cut -b-7`" = "solaris"; then
         # remove -g with Solaris CC as it reduces optimization levels
 	CXXFLAGS="`echo $CXXFLAGS| sed s/-g//` -xO5" # Solaris CC
-    elif test -n "`echo $CXX|grep aCC`"; then 
+    elif test -n "`echo $CXX|grep aCC`"; then
         # remove -g with HP-UX aCC as it reduces optimization levels
 	CXXFLAGS="`echo $CXXFLAGS| sed s/-g//` +O4" # HP-UX aCC
     fi
